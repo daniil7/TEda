@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
-from .env import *
+from teda import env
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-^p&=y_g1w791k2ti8%b=_g4p!0z*qj2awk^avwm5aqy%gg_dnb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env_debug
+DEBUG = env.debug
 
 ALLOWED_HOSTS = []
 
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'catalog.apps.CatalogConfig',
 ]
 
@@ -87,9 +88,9 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': env_database_name,
-            'USER': env_database_user,
-            'PASSWORD': env_database_password,
+            'NAME': env.database_name,
+            'USER': env.database_user,
+            'PASSWORD': env.database_password,
             'HOST': 'localhost',
             'PORT': '',
         }
