@@ -1,20 +1,19 @@
 from django.contrib import admin
 from .models import *
 from django.contrib.auth.models import Group, User
+
 admin.site.site_header = "T.Еда Административная панель"
 
+class DishInline(admin.StackedInline):
+    model = Dish_Category
+    extra = 3
 
-class DishesAdmin(admin.ModelAdmin):
-    list_display = ("title","price","description","weight")
+class CategoryAdmin(admin.ModelAdmin):
+    inlines = [DishInline]
+    list_display = ["title"]
 
-class Dish_CategoryAdminAdmin(admin.ModelAdmin):
-    list_display = ("dish","category")
-
-admin.site.register(Dishes, DishesAdmin)
-admin.site.register(Dish_Category, Dish_CategoryAdminAdmin)
-
-admin.site.register(Categories)
-
+admin.site.register(Category, CategoryAdmin)
+admin.site.register(Dish)
 
 admin.site.unregister(Group)
 admin.site.unregister(User)
