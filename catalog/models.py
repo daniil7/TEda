@@ -15,7 +15,7 @@ class Dish(models.Model):
     title = models.CharField(max_length=500, verbose_name = "Блюдо")
     price = models.PositiveIntegerField(verbose_name = "Цена")
     description = models.CharField(max_length=500, verbose_name = "Описание", blank=True, null=True)
-    image = models.ImageField(verbose_name = "Фотография", blank=True, null=True)
+    image = models.ImageField(verbose_name = "Фотография", upload_to="dish-images/", blank=True, null=True)
     weight = models.PositiveIntegerField(verbose_name = "Вес", blank=True, null=True)
 
     categories = models.ManyToManyField('Category', through='Dish_Category')
