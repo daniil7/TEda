@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save, post_init
+from django.utils.html import format_html
 
 import os
 
@@ -28,9 +29,6 @@ class Dish(models.Model):
 
     categories = models.ManyToManyField('Category', through='Dish_Category')
 
-    def thumbnail(self):
-        return os.path.join('dish-images/thumbnails', os.path.basename(self.image.name))
-
     def __str__(self):
         return self.title
 
@@ -38,9 +36,25 @@ class Dish(models.Model):
         verbose_name = "Блюдо"
         verbose_name_plural = "Блюда"
 
+    def thumbnail_path(self):
+        return os.path.join('dish-images/thumbnails', os.path.basename(self.image.name))
+    def thumbnail_url(self):
+        return os.path.join(settings.MEDIA_URL, self.thumbnail_path())
+    def thumbnail_tag(self):
+        return format_html('<img src="{0}">', self.thumbnail_url())
+    thumbnail_tag.allow_tags = True
+    thumbnail_tag.description = "Изображение"
+    thumbnail_tag.short_description = "Изображение"
+
+    def image_tag(self):
+        return format_html('<img src="{0}" width="300" height="300">', self.image.url)
+    image_tag.allow_tags = True
+    image_tag.description = "Изображение"
+    thumbnail_tag.short_description = "Изображение"
+
     @staticmethod
     def post_save(sender, instance, created, **kwargs):
-        if instance.previous_image != instance.image or created:
+        if (instance.previous_image != instance.image or created) and (instance.image.name is not None):
             if not created:
                 os.remove(os.path.join(settings.MEDIA_ROOT, instance.previous_image.name))
                 os.remove(os.path.join(settings.MEDIA_ROOT, "dish-images/thumbnails", os.path.basename(instance.previous_image.name)))

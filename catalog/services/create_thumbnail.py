@@ -8,7 +8,7 @@ def createThumbnail(image_path):
         image = Image.open(image_path)
     except:
         return False
-    image.thumbnail((360,360), Image.ANTIALIAS)
+    image.thumbnail((200,200), Image.ANTIALIAS)
     image_filename = os.path.basename(image_path)
     thumb_name, thumb_extension = os.path.splitext(image_filename)
     thumb_extension = thumb_extension.lower()
