@@ -47,7 +47,7 @@ class Dish(models.Model):
     thumbnail_tag.short_description = "Изображение"
 
     def image_tag(self):
-        return format_html('<img src="{0}" width="300" height="300">', self.image.url)
+        return format_html('<img src="{0}">', self.image.url)
     image_tag.allow_tags = True
     image_tag.description = "Изображение"
     thumbnail_tag.short_description = "Изображение"
