@@ -78,6 +78,7 @@ post_init.connect(Dish.remember_state, sender=Dish)
 
 class Category(models.Model):
     title = models.CharField(max_length=100, verbose_name="Категория блюд")
+    image = models.ImageField(verbose_name = "Фотография", upload_to="category-images/", blank=True, null=True)
 
     dishes = models.ManyToManyField('Dish', through='Dish_Category')
 

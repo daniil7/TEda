@@ -1,4 +1,5 @@
 .pylintrc
+static/css/output.css
 teda/env.py
 db.sqlite3
 
