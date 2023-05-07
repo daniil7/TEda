@@ -3,4 +3,5 @@ teda/env.py
 db.sqlite3
 
 media/
+jstoolchain/node_modules/
 **/__pycache__/
