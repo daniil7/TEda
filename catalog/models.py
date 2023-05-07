@@ -1,10 +1,11 @@
+import os
+
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save, post_init
 from django.utils.html import format_html
 
-import os
 
 from catalog.services.create_thumbnail import createThumbnail
 
