@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="sm:flex sm:flex-row sm:space-x-4 sm:justify-center px-4 sm:px-8 py-4 text-text">
+
+    {% for category in categories %}
+    <div class="block sm:inline-block shadow-lg rounded bg-middle px-4 sm:px-8 py-4 my-4 sm:my-0 sm:w-[20rem]">
+        <a href="/">
+            {% if category.image %}
+            <img src="{{ category.image.url }}" class="w-[15rem] h-[15rem] rounded-full">
+            {% endif %}
+            <hr class="h-px my-4 bg-secondary border-0">
+            <h1 class="text-lg text-center">{{category.title}}</h1>
+        </a>
+    </div>
+    {% endfor %}
+
+</div>
+
+{% endblock %}

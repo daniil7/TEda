@@ -1,10 +1,11 @@
+import os
+
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save, post_init
 from django.utils.html import format_html
 
-import os
 
 from catalog.services.create_thumbnail import createThumbnail
 
@@ -77,6 +78,7 @@ post_init.connect(Dish.remember_state, sender=Dish)
 
 class Category(models.Model):
     title = models.CharField(max_length=100, verbose_name="Категория блюд")
+    image = models.ImageField(verbose_name = "Фотография", upload_to="category-images/", blank=True, null=True)
 
     dishes = models.ManyToManyField('Dish', through='Dish_Category')
 

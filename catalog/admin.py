@@ -9,7 +9,7 @@ class DishInline(admin.StackedInline):
     extra = 3
 class CategoryAdmin(admin.ModelAdmin):
     inlines = [DishInline]
-    list_display = ["title"]
+    list_display = ["title", "image"]
 
 class DishAdmin(admin.ModelAdmin):
     list_display = ["title",  "price", "thumbnail_tag"]
