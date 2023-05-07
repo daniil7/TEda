@@ -12,16 +12,11 @@
 
     <body class="bg-secondary flex flex-col h-screen">
 
-        <header class="px-8 py-2 w-full bg-primary text-white">
-            <ul>
-                <li><a href="{% url 'index' %}" class="inline-block px-2 py-1 border-solid border-2 border-teal-400 rounded hover:bg-teal-500 hover:text-gray-300 hover:border-teal-600">Главная</a></li>
-                {# menu #}
-            </ul>
-        </header>
+        {% include "inc/header.html" %}
 
         <main>
 
-        {% block content %}<!-- default content text (typically empty) -->{% endblock %}
+        {% block content %}{% endblock %}
 
         </main>
 
