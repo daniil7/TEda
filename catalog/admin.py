@@ -7,13 +7,15 @@ admin.site.site_header = "T.Еда Административная панель
 class DishInline(admin.StackedInline):
     model = Dish_Category
     extra = 3
-
 class CategoryAdmin(admin.ModelAdmin):
     inlines = [DishInline]
     list_display = ["title"]
 
+class DishAdmin(admin.ModelAdmin):
+    list_display = ["title",  "price", "thumbnail_tag"]
+
 admin.site.register(Category, CategoryAdmin)
-admin.site.register(Dish)
+admin.site.register(Dish, DishAdmin)
 
 admin.site.unregister(Group)
 admin.site.unregister(User)
