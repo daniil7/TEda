@@ -1,0 +1,31 @@
+{% load static %}
+
+<div class="sm:flex sm:flex-row gap-4 mb-3 shadow-lg rounded bg-middle p-3">
+    {% if dish.image %}
+    <img src="{{ dish.thumbnail_url }}" class="w-[10rem] h-[10rem] mb-2 sm:mb-0">
+    {% endif %}
+    <div>
+        <h1 class="text-2xl">{{dish.title}}</h1>
+        <p class="break-long-words pt-2">
+        {{dish.discription}}
+        {% lorem %}
+        </p>
+    </div>
+    <div class="flex sm:self-center sm:grow justify-end items-center min-w-[10rem]">
+
+        <form method="POST" action="/" class="table">
+            {% csrf_token %}
+            <button class="triangle-left table-cell align-middle"></button>
+        </form>
+        <span class="mx-2">999</span>
+        <form method="POST" action="/" class="table mr-4">
+            {% csrf_token %}
+            <button class="triangle-right table-cell align-middle"></button>
+        </form>
+
+        <form method="POST" action="/">
+            {% csrf_token %}
+            <input type="image" src="{% static "images/shopping-cart-minus.svg" %}" class="w-[4rem] h-[4rem] undraggable">
+        </form>
+    </div>
+</div>

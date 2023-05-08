@@ -1,3 +1,51 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .break-long-words {
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        word-break: break-all;
+        word-break: break-word;
+        hyphens: auto;
+    }
+
+    .undraggable {
+        user-drag: none;
+        -webkit-user-drag: none;
+        user-select: none;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
+
+    .triangle-up {
+        width: 0;
+        height: 0;
+        border-left: 0.7rem solid transparent;
+        border-right: 0.7rem solid transparent;
+        border-bottom: 1rem solid #000000;
+    }
+    .triangle-down {
+        width: 0;
+        height: 0;
+        border-left: 0.7rem solid transparent;
+        border-right: 0.7rem solid transparent;
+        border-top: 1rem solid #000000;
+    }
+    .triangle-left {
+        width: 0;
+        height: 0;
+        border-top: 0.7rem solid transparent;
+        border-bottom: 0.7rem solid transparent;
+        border-right: 1rem solid #000000;
+    }
+    .triangle-right {
+        width: 0;
+        height: 0;
+        border-top: 0.7rem solid transparent;
+        border-bottom: 0.7rem solid transparent;
+        border-left: 1rem solid #000000;
+    }
+}

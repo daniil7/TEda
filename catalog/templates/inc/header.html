@@ -10,7 +10,7 @@
         </a>
         {# категории #}
         {% for category in categories %}
-        <a href="{% url 'index' %}" class="inline-block px-2 py-1 border-solid border-2 border-teal-400 rounded hover:bg-teal-500 hover:text-gray-300 hover:border-teal-600">
+        <a href="{% url 'index_category' category.id %}" class="inline-block px-2 py-1 border-solid border-2 border-teal-400 rounded hover:bg-teal-500 hover:text-gray-300 hover:border-teal-600">
             {{ category.title|upper }}
         </a>
         {% endfor %}
@@ -33,7 +33,7 @@
                     </a>
                     {% for category in categories %}
                     <hr />
-                    <a href="{% url 'index' %}"
+                    <a href="{% url 'index_category' category.id %}"
                        class="px-7 py-3 label font-bold text-white">
                         {{ category.title|upper }}
                     </a>
