@@ -2,10 +2,10 @@
 
 <div class="sm:flex sm:flex-row gap-4 mb-3 shadow-lg rounded bg-middle p-3">
     {% if dish.image %}
-    <img src="{{ dish.thumbnail_url }}" class="w-[10rem] h-[10rem] mb-2 sm:mb-0">
+    <img src="{{ dish.thumbnail_url }}" class="w-[10rem] h-[10rem] mb-2 sm:mb-0 mx-auto">
     {% endif %}
     <div>
-        <h1 class="text-2xl">{{dish.title}}</h1>
+        <h1 class="text-2xl text-center sm:text-left">{{dish.title}}</h1>
         <p class="break-long-words pt-2">
         {{dish.discription}}
         {% lorem %}
