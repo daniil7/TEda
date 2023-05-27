@@ -42,3 +42,16 @@ def minus_to_cart(user: User, dish: Dish):
         else:
             order_dish.count -= 1
             order_dish.save()
+
+def remove_from_cart(user: User, dish: Dish):
+    try:
+        order = Order.objects.get(
+                user=user,
+                status=Order.statuses.not_started,
+                )
+    except:
+        return
+    order_dish = Order_Dish.objects.filter(order=order.id, dish=dish.id).first()
+    if order_dish:
+        order_dish.delete()
+    return

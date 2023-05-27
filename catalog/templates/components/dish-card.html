@@ -26,9 +26,18 @@
             <button class="triangle-right table-cell align-middle"></button>
         </form>
 
-        <form method="POST" action="/">
+        {% if dish.count %}
+        <form method="POST" action="{% url 'cart_remove' %}">
             {% csrf_token %}
+            <input type="hidden" name="dish_id" value="{{dish.id}}" />
             <input type="image" src="{% static "images/shopping-cart-minus.svg" %}" class="w-[4rem] h-[4rem] undraggable">
         </form>
+        {% else %}
+        <form method="POST" action="{% url 'cart_plus' %}">
+            {% csrf_token %}
+            <input type="hidden" name="dish_id" value="{{dish.id}}" />
+            <input type="image" src="{% static "images/shopping-cart-plus.svg" %}" class="w-[4rem] h-[4rem] undraggable">
+        </form>
+        {% endif %}
     </div>
 </div>

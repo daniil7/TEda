@@ -59,6 +59,13 @@ class MinusToCart(View):
         cart.minus_to_cart(request.user, dish)
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+class RemoveFromCart(View):
+    def post(self, request):
+        dish_id = request.POST.get('dish_id', 0)
+        dish = get_object_or_404(Dish, id=dish_id)
+        cart.remove_from_cart(request.user, dish)
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
 # Registration
 
 class RegisterUser(View):
