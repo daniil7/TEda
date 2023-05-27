@@ -4,8 +4,10 @@ from django.shortcuts import get_object_or_404
 from django.views import View
 from catalog.models import Category, Dish
 from .forms import UserCreationForm
-from django.contrib.auth import authenticate,login  
+from django.contrib.auth import authenticate,login
+from django.http import HttpResponseRedirect
 
+from catalog.services import cart
 
 # Create your views here.
 
@@ -29,6 +31,8 @@ def index_category(request, category_id):
     categories = Category.objects.all()
     category = get_object_or_404(Category, id=category_id)
     dishes = Dish.objects.filter(categories=category)
+    for dish in dishes:
+        dish.count = cart.dish_count(request.user, dish)
     return render(
             request,
             'category.html',
@@ -39,16 +43,33 @@ def index_category(request, category_id):
             )
 
 
+# Cart management
+
+class PlusToCart(View):
+    def post(self, request):
+        dish_id = request.POST.get('dish_id', 0)
+        dish = get_object_or_404(Dish, id=dish_id)
+        cart.plus_to_cart(request.user, dish)
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+class MinusToCart(View):
+    def post(self, request):
+        dish_id = request.POST.get('dish_id', 0)
+        dish = get_object_or_404(Dish, id=dish_id)
+        cart.minus_to_cart(request.user, dish)
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+# Registration
 
 class RegisterUser(View):
     teamplate_name = "registration/register.html"
 
     def get(self,request):
         context = {
-            'form': UserCreationForm() 
+            'form': UserCreationForm()
         }
         return render(request,self.teamplate_name,context)
-    
+
     def post(self, request):
         form = UserCreationForm(request.POST)
 
@@ -63,5 +84,3 @@ class RegisterUser(View):
                 'form': form
             }
         return render(request, self.teamplate_name, context)
-            
-        

@@ -11,15 +11,18 @@
         {% lorem %}
         </p>
     </div>
-    <div class="flex sm:self-center sm:grow justify-end items-center min-w-[10rem]">
+    <div class="flex sm:self-center sm:grow justify-end items-center min-w-[13rem]">
 
-        <form method="POST" action="/" class="table">
+        <div class="mx-2">цена: {{dish.price}}₽</div>
+        <form method="POST" action="{% url 'cart_minus' %}" class="table">
             {% csrf_token %}
+            <input type="hidden" name="dish_id" value="{{dish.id}}" />
             <button class="triangle-left table-cell align-middle"></button>
         </form>
-        <span class="mx-2">999</span>
-        <form method="POST" action="/" class="table mr-4">
+        <span class="mx-2">{{dish.count}}</span>
+        <form method="POST" action="{% url 'cart_plus' %}" class="table mr-4">
             {% csrf_token %}
+            <input type="hidden" name="dish_id" value="{{dish.id}}" />
             <button class="triangle-right table-cell align-middle"></button>
         </form>
 

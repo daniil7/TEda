@@ -7,6 +7,10 @@ urlpatterns = [
 
     path('category/<int:category_id>/', views.index_category, name='index_category'),
 
+    # cart
+    path('cart/plus/', views.PlusToCart.as_view(), name='cart_plus'),
+    path('cart/minus/', views.MinusToCart.as_view(), name='cart_minus'),
+
     path('account/', include('django.contrib.auth.urls')),
     path('account/register/', views.RegisterUser.as_view(), name='register'),
 

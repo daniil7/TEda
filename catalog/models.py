@@ -16,8 +16,13 @@ class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     time = models.TimeField(blank=True, null=True)
     status = models.IntegerField()
-
     dishes = models.ManyToManyField('Dish', through='Order_Dish')
+
+    class statuses:
+        not_started = 0
+        waiting = 1
+        in_progress = 2
+        completed = 3
 
 
 class Dish(models.Model):

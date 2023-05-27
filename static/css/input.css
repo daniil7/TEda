@@ -25,27 +25,27 @@
         height: 0;
         border-left: 0.7rem solid transparent;
         border-right: 0.7rem solid transparent;
-        border-bottom: 1rem solid #000000;
+        border-bottom: 1rem solid #DDD;
     }
     .triangle-down {
         width: 0;
         height: 0;
         border-left: 0.7rem solid transparent;
         border-right: 0.7rem solid transparent;
-        border-top: 1rem solid #000000;
+        border-top: 1rem solid #DDD;
     }
     .triangle-left {
         width: 0;
         height: 0;
         border-top: 0.7rem solid transparent;
         border-bottom: 0.7rem solid transparent;
-        border-right: 1rem solid #000000;
+        border-right: 1rem solid #DDD;
     }
     .triangle-right {
         width: 0;
         height: 0;
         border-top: 0.7rem solid transparent;
         border-bottom: 0.7rem solid transparent;
-        border-left: 1rem solid #000000;
+        border-left: 1rem solid #DDD;
     }
 }
