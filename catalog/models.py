@@ -6,9 +6,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save, post_init
 from django.utils.html import format_html
 
-
 from catalog.services.create_thumbnail import createThumbnail
-
 
 # Create your models here.
 
@@ -20,8 +18,8 @@ class Order(models.Model):
 
     class statuses:
         not_started = 0
-        waiting = 1
-        in_progress = 2
+        in_progress = 1
+        waiting = 2
         completed = 3
 
 

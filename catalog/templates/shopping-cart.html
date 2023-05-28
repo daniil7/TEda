@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="px-4 sm:px-16 py-4 lg:mx-16 xl:mx-32">
+
+    <div class="text-left text-4xl text-text-secondary my-3">
+    Корзина
+    </div>
+
+    {% for dish in dishes %}
+
+    <div class="mb-4">
+        {% include "components/dish-card.html" %}
+    </div>
+
+    {% empty %}
+
+    <div class="text-center text-5xl text-text-secondary mt-3">
+        Ваша корзина пуста.
+        <a class="cursor-pointer underline" href="{% url 'index' %}">
+            перейти к меню
+        </a>
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}
+
+{% block footer %}
+
+<div class="mx-8 md:mx-16 lg:mx-16 my-4">
+    <hr class="h-px mb-2 bg-text-secondary border-0" />
+    <div class="sm:flex sm:flex-row sm:justify-between sm:items-center py-2 sm:text-xl lg:text-2xl sm:mx-12 lg:mx-32">
+        <div class="mb-2">ИТОГО К ОПЛАТЕ</div>
+        <div class="mb-2">{{total_sum}} руб.</div>
+        <button class="inline-block px-8 py-2 rounded-full bg-primary text-text-primary">ОФОРМИТЬ ЗАКАЗ</button>
+    </div>
+</div>
+
+{% endblock %}

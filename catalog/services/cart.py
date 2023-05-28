@@ -55,3 +55,15 @@ def remove_from_cart(user: User, dish: Dish):
     if order_dish:
         order_dish.delete()
     return
+
+def make_order(user: User):
+    try:
+        order = Order.objects.get(
+                user=user,
+                status=Order.statuses.not_started,
+                )
+    except:
+        return
+    order.status = Order.statuses.in_progress
+    order.save()
+    return
