@@ -1,16 +1,16 @@
 {% load static %}
 
-<header class="px-8 py-2 w-full bg-primary text-white flex items-center space-x-4">
+<header class="px-8 py-2 w-full bg-primary flex items-center space-x-4">
 
     <a href="/"><img src="{% static "images/logo.svg" %}"/></a>
 
-    <div class="hidden sm:block">
-        <a href="{% url 'index' %}" class="inline-block px-2 py-1 border-solid border-2 border-teal-400 rounded hover:bg-teal-500 hover:text-gray-300 hover:border-teal-600">
+    <div class="hidden sm:block text-text-primary">
+        <a href="{% url 'index' %}" class="inline-block px-2 py-1 border-solid border-2 border-middle rounded hover:bg-middle hover:text-text-middle">
             МЕНЮ
         </a>
         {# категории #}
         {% for category in categories %}
-        <a href="{% url 'index_category' category.id %}" class="inline-block px-2 py-1 border-solid border-2 border-teal-400 rounded hover:bg-teal-500 hover:text-gray-300 hover:border-teal-600">
+        <a href="{% url 'index_category' category.id %}" class="inline-block px-2 py-1 border-solid border-2 border-middle rounded hover:bg-middle hover:text-text-middle">
             {{ category.title|upper }}
         </a>
         {% endfor %}
@@ -20,32 +20,32 @@
         <div class="flex self-center justify-end grow">
             {# Выпадающее меню #}
             <div class="relative float-right inline-block self-center mr-1.5" x-data="{ open: false }" x-on:click="open = !open" x-on:click.outside="open = false">
-                <div class="label text-white font-bold cursor-pointer">
+                <div class="label font-bold cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40" height="40">
                         <path d="M3 4H21V6H3V4ZM3 11H21V13H3V11ZM3 18H21V20H3V18Z" fill="#FFFFFF"></path>
                     </svg>
                 </div>
                 <div class="absolute flex flex-col right-0 z-10 min-w-max
-                                      shadow-xl bg-teal-400"
+                                      shadow-xl bg-middle"
                      x-cloak x-show="open">
                     <a href="/"
-                       class="px-7 py-3 label font-bold text-white">
+                       class="px-7 py-3 label font-bold text-text-middle">
                         ПРОФИЛЬ
                     </a>
                     <hr />
                     <a href="/"
-                       class="px-7 py-3 label font-bold text-white">
+                       class="px-7 py-3 label font-bold text-text-middle">
                         КОРЗИНА
                     </a>
                     <hr />
                     <a href="/"
-                       class="px-7 py-3 label font-bold text-white">
+                       class="px-7 py-3 label font-bold text-text-middle">
                         МЕНЮ
                     </a>
                     {% for category in categories %}
                     <hr />
                     <a href="{% url 'index_category' category.id %}"
-                       class="px-7 py-3 label font-bold text-white">
+                       class="px-7 py-3 label font-bold text-text-middle">
                         {{ category.title|upper }}
                     </a>
                     {% endfor %}

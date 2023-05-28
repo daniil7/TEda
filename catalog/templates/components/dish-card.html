@@ -1,42 +1,45 @@
 {% load static %}
 
-<div class="sm:flex sm:flex-row gap-4 mb-3 shadow-lg rounded bg-middle p-3">
-    {% if dish.image %}
-    <img src="{{ dish.thumbnail_url }}" class="w-[10rem] h-[10rem] mb-2 sm:mb-0 mx-auto">
-    {% endif %}
-    <div>
-        <h1 class="text-2xl text-center sm:text-left">{{dish.title}}</h1>
-        <p class="break-long-words pt-2">
-        {{dish.discription}}
-        {% lorem %}
-        </p>
+<div class="shadow-lg rounded bg-middle p-3">
+    <div class="sm:flex sm:flex-row gap-4">
+        {% if dish.image %}
+        <img src="{{ dish.thumbnail_url }}" class="w-[7rem] h-[7rem] mb-2 sm:mb-0 mx-auto rounded-full">
+        {% endif %}
+        <div>
+            <h1 class="text-3xl text-text-middle sm:text-left">{{dish.title}}</h1>
+            <p class="break-long-words pt-2 text-text-middle">
+            {{dish.discription}}
+            {% lorem %}
+            </p>
+        </div>
     </div>
-    <div class="flex sm:self-center sm:grow justify-end items-center min-w-[13rem]">
 
-        <div class="mx-2">цена: {{dish.price}}₽</div>
-        <form method="POST" action="{% url 'cart_minus' %}" class="table">
-            {% csrf_token %}
-            <input type="hidden" name="dish_id" value="{{dish.id}}" />
-            <button class="triangle-left table-cell align-middle"></button>
-        </form>
-        <span class="mx-2">{{dish.count}}</span>
-        <form method="POST" action="{% url 'cart_plus' %}" class="table mr-4">
-            {% csrf_token %}
-            <input type="hidden" name="dish_id" value="{{dish.id}}" />
-            <button class="triangle-right table-cell align-middle"></button>
-        </form>
-
+    <div class="flex sm:grow justify-end items-center">
+        <div class="mx-2 text-text-middle text-xl">цена: {{dish.price}}₽</div>
+        <div class="bg-primary rounded-full p-1 mx-2 text-text-primary text-xl">
+            <form method="POST" action="{% url 'cart_minus' %}" class="inline-block">
+                {% csrf_token %}
+                <input type="hidden" name="dish_id" value="{{dish.id}}" />
+                <button class="text-center">－</button>
+            </form>
+            <span class="mx-2 text-text-primary inline-block">{{dish.count}} ШТ.</span>
+            <form method="POST" action="{% url 'cart_plus' %}" class="inline-block">
+                {% csrf_token %}
+                <input type="hidden" name="dish_id" value="{{dish.id}}" />
+                <button class="text-center text-2xl">+</button>
+            </form>
+        </div>
         {% if dish.count %}
         <form method="POST" action="{% url 'cart_remove' %}">
             {% csrf_token %}
             <input type="hidden" name="dish_id" value="{{dish.id}}" />
-            <input type="image" src="{% static "images/shopping-cart-minus.svg" %}" class="w-[4rem] h-[4rem] undraggable">
+            <input type="image" src="{% static "images/shopping-cart-minus.svg" %}" class="w-[3rem] h-[3rem] undraggable">
         </form>
         {% else %}
         <form method="POST" action="{% url 'cart_plus' %}">
             {% csrf_token %}
             <input type="hidden" name="dish_id" value="{{dish.id}}" />
-            <input type="image" src="{% static "images/shopping-cart-plus.svg" %}" class="w-[4rem] h-[4rem] undraggable">
+            <input type="image" src="{% static "images/shopping-cart-plus.svg" %}" class="w-[3rem] h-[3rem] undraggable">
         </form>
         {% endif %}
     </div>
