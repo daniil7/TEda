@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if next %}
+  {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+  {% else %}
+    <p>Please login to see this page.</p>
+  {% endif %}
+{% endif %}
+
+<div class="flex justify-center items-center w-full h-full">
+    <div class="block sm:w-[500px] mx-5 sm:mx-auto shadow-lg rounded bg-middle p-3 mt-5">
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="mx-2">
+                <div class="mb-3">
+                    <div class="inline-block mr-2">
+                        {{ form.username.label_tag }}
+                    </div>
+                    <div class="inline-block">
+                        {{ form.username }}
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="inline-block mr-2">
+                        {{ form.password.label_tag }}
+                    </div>
+                    <div class="inline-block">
+                        {{ form.password }}
+                    </div>
+                </div>
+                <input type="submit" value="Авторизоваться" class="border-2 border-secondary rounded cursor-pointer px-2 py-1"/>
+                <input type="hidden" name="next" value="{{ next }}" />
+            </div>
+        </form>
+        {% if form.errors %}
+        <p class="mt-2 text-red-600">Неверный логин или пароль</p>
+        {% endif %}
+    </div>
+</div>
+
+{# Assumes you setup the password_reset view in your URLconf #}
+{# <p><a href="{% url 'password_reset' %}">Lost password?</a></p> #}
+
+{% endblock %}

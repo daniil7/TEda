@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="px-4 sm:px-16 py-4 text-text">
+
+    {% for dish in dishes %}
+
+        {% include "components/dish-card.html" %}
+
+    {% empty %}
+
+        <div class="text-center text-5xl text-white mt-4">Товары данной категории отсутствуют</div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

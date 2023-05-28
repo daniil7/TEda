@@ -1,21 +1,26 @@
 <!DOCTYPE html>
 {% load static %}
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="{% static "css/output.css" %}">
-    {% block title %}<title>ТЕда</title>{% endblock %}
-</head>
+<html lang="en" class="h-full">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="{% static "css/output.css" %}">
+        <script defer type="text/javascript" src="{% static "js/main.js" %}"></script>
+        {% block title %}<title>ТЕда</title>{% endblock %}
+    </head>
 
-<header class="mb-2 px-8 py-3 w-full bg-primary text-white">
-    abc
-</header>
+    <body class="bg-secondary flex flex-col h-screen h-full">
 
-<body class="bg-secondary flex flex-col h-screen">
-    <main class="grow mx-1 sm:mx-10">
-    {% block content %}<!-- default content text (typically empty) -->{% endblock %}
-    </main>
-</body>
+        {% include "inc/header.html" %}
+
+        <main class="h-full">
+
+            {% block content %}{% endblock %}
+
+        </main>
+
+        {% include "inc/paginator.html" %}
+
+    </body>
 </html>

@@ -1,6 +1,11 @@
 from django.contrib import admin
 from .models import *
 from django.contrib.auth.models import Group, User
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth import get_user_model
+
+ 
+
 
 admin.site.site_header = "T.Еда Административная панель"
 
