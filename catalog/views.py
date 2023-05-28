@@ -47,21 +47,14 @@ def shopping_cart(request):
     Функция отображения корзины пользователя
     """
     categories = Category.objects.all()
-    order = Order.objects.filter(user=request.user, status=Order.statuses.not_started).first()
-    dishes = None
-    total_sum = 0
-    if order:
-        dishes = order.dishes.all()
-        for dish in dishes:
-            dish.count = cart.dish_count(request.user, dish)
-        total_sum = sum(dish.price * dish.count for dish in dishes)
+    user_cart = cart.get_cart(request.user)
     return render(
             request,
             'shopping-cart.html',
             context={
                 'categories': categories,
-                'dishes': dishes,
-                'total_sum': total_sum,
+                'dishes': user_cart['dishes'],
+                'total_sum': user_cart['total_sum'],
                 }
             )
 
