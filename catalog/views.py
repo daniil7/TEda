@@ -42,7 +42,6 @@ def index_category(request, category_id):
                 }
             )
 
-
 # Cart management
 
 class PlusToCart(View):
