@@ -3,15 +3,17 @@
 
 {% block content %}
 
-<div class="px-4 sm:px-16 py-4 text-text">
+<div class="px-4 sm:px-16 py-4">
 
     {% for dish in dishes %}
 
+    <div class="lg:mx-16 xl:mx-32 mb-4">
         {% include "components/dish-card.html" %}
+    </div>
 
     {% empty %}
 
-        <div class="text-center text-5xl text-white mt-4">Товары данной категории отсутствуют</div>
+        <div class="text-center text-5xl text-text-secondary mt-4">Товары данной категории отсутствуют</div>
 
     {% endfor %}
 
