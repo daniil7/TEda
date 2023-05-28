@@ -1,6 +1,12 @@
 from django.contrib.auth.models import User
 from catalog.models import Order, Order_Dish, Dish
 
+class ObjectNotFoundError(Exception):
+    message: str
+    def __init__(self, message: str):
+        super().__init__(message)
+        self.message = message
+
 def dish_count(user: User, dish: Dish):
     if user.is_authenticated:
         order = Order.objects.filter(user=user, status=Order.statuses.not_started).first()
@@ -62,8 +68,7 @@ def make_order(user: User):
                 user=user,
                 status=Order.statuses.not_started,
                 )
-    except:
-        return
+    except Exception as exc:
+        raise ObjectNotFoundError('Невозможно найти заказ для оформления') from exc
     order.status = Order.statuses.in_progress
     order.save()
-    return

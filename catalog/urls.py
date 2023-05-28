@@ -12,6 +12,7 @@ urlpatterns = [
     path('cart/plus/', views.PlusToCart.as_view(), name='cart_plus'),
     path('cart/minus/', views.MinusToCart.as_view(), name='cart_minus'),
     path('cart/remove/', views.RemoveFromCart.as_view(), name='cart_remove'),
+    path('cart/makeorder/', views.MakeOrder.as_view(), name='make_order'),
 
     path('account/', include('django.contrib.auth.urls')),
     path('account/register/', views.RegisterUser.as_view(), name='register'),

@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404
 from django.views import View
 from django.contrib.auth import authenticate,login
 from django.http import HttpResponseRedirect
+from django.contrib import messages
 
 from catalog.models import Category, Dish, Order
 from catalog.services import cart
@@ -47,16 +48,20 @@ def shopping_cart(request):
     """
     categories = Category.objects.all()
     order = Order.objects.filter(user=request.user, status=Order.statuses.not_started).first()
-    dishes = order.dishes.all()
-    for dish in dishes:
-        dish.count = cart.dish_count(request.user, dish)
+    dishes = None
+    total_sum = 0
+    if order:
+        dishes = order.dishes.all()
+        for dish in dishes:
+            dish.count = cart.dish_count(request.user, dish)
+        total_sum = sum(dish.price * dish.count for dish in dishes)
     return render(
             request,
             'shopping-cart.html',
             context={
                 'categories': categories,
                 'dishes': dishes,
-                'total_sum': sum(dish.price * dish.count for dish in dishes),
+                'total_sum': total_sum,
                 }
             )
 
@@ -97,7 +102,11 @@ class MakeOrder(View):
     Оформление заказа
     """
     def post(self, request):
-        cart.make_order(request.user)
+        try:
+            cart.make_order(request.user)
+        except cart.ObjectNotFoundError as exc:
+            messages.error(request=request, message=exc.message)
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 # Registration
 

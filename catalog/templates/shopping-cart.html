@@ -17,7 +17,7 @@
 
     {% empty %}
 
-    <div class="text-center text-5xl text-text-secondary mt-3">
+    <div class="text-left text-4xl text-text-secondary my-3">
         Ваша корзина пуста.
         <a class="cursor-pointer underline" href="{% url 'index' %}">
             перейти к меню
@@ -37,8 +37,16 @@
     <div class="sm:flex sm:flex-row sm:justify-between sm:items-center py-2 sm:text-xl lg:text-2xl sm:mx-12 lg:mx-32">
         <div class="mb-2">ИТОГО К ОПЛАТЕ</div>
         <div class="mb-2">{{total_sum}} руб.</div>
-        <button class="inline-block px-8 py-2 rounded-full bg-primary text-text-primary">ОФОРМИТЬ ЗАКАЗ</button>
+        <form action="{% url 'make_order' %}" method="POST" accept-charset="utf-8">
+            {% csrf_token %}
+            <button class="inline-block px-8 py-2 rounded-full bg-primary text-text-primary">ОФОРМИТЬ ЗАКАЗ</button>
+        </form>
     </div>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="text-red-500">{{message}}</div>
+    {% endfor %}
+    {% endif %}
 </div>
 
 {% endblock %}
