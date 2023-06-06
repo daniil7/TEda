@@ -32,7 +32,8 @@
                         {{ form.password }}
                     </div>
                 </div>
-                <input type="submit" value="Авторизоваться" class="border-2 border-secondary rounded cursor-pointer px-2 py-1"/>
+                <input type="submit" value="Авторизоваться" class="inline-block border-2 border-secondary rounded cursor-pointer px-2 py-1"/>
+                <a href="{% url 'register' %}" class="inline-block border-2 border-secondary rounded cursor-pointer px-2 py-1">Зарегистрироваться</a>
                 <input type="hidden" name="next" value="{{ next }}" />
             </div>
         </form>
