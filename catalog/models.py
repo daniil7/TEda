@@ -62,7 +62,7 @@ class Dish(models.Model):
     @staticmethod
     def post_save(sender, instance, created, **kwargs):
         if (instance.previous_image != instance.image or created) and (instance.image.name is not None):
-            if not created:
+            if not created and instance.previous_image.name:
                 os.remove(os.path.join(settings.MEDIA_ROOT, instance.previous_image.name))
                 os.remove(os.path.join(settings.MEDIA_ROOT, "dish-images/thumbnails", os.path.basename(instance.previous_image.name)))
             thumbnail_directory = os.path.join(settings.MEDIA_ROOT, "dish-images/thumbnails")
