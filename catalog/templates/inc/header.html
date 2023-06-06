@@ -28,6 +28,13 @@
                 <div class="absolute flex flex-col right-0 z-10 min-w-max
                                       shadow-xl bg-middle"
                      x-cloak x-show="open">
+                    {% if user.is_superuser %}
+                    <a href="{% url 'admin:index' %}"
+                        class="px-7 py-3 label font-bold text-text-middle">
+                        ПАНЕЛЬ АДМИНИСТРАТОРА
+                    </a>
+                    <hr />
+                    {% endif %}
                     <a href="/"
                        class="px-7 py-3 label font-bold text-text-middle">
                         ПРОФИЛЬ
