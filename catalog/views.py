@@ -1,19 +1,15 @@
-from .models import Profile
 from django.db import models
 from django.shortcuts import redirect, render
 from django.shortcuts import get_object_or_404
-from django.urls import reverse_lazy
 from django.views import View
 from django.contrib.auth import authenticate,login
-from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 
 from catalog.models import Category, Dish, Order
 from catalog.services import cart
+from .models import Profile
 from .forms import UserCreationForm
-from django.contrib.auth.forms import UserChangeForm
 
 # Create your views here.
 
@@ -116,7 +112,9 @@ class RegisterUser(View):
     teamplate_name = "registration/register.html"
 
     def get(self,request):
+        categories = Category.objects.all()
         context = {
+            'categories': categories,
             'form': UserCreationForm()
         }
         return render(request,self.teamplate_name,context)
@@ -138,24 +136,15 @@ class RegisterUser(View):
         return render(request, self.teamplate_name, context)
 
 class ShowProfilePageView(View):
-    model = Profile
+    """
+    Отображение страницы профиля пользователя
+    """
     template_name = 'profile/profile.html'
     def get(self, request):
-        page_user = get_object_or_404(Profile, id=request.user.id)
-        context = {'page_user': page_user}
+        categories = Category.objects.all()
+        page_user = Profile.objects.get_or_create(user=request.user, defaults={'fio':None})[0]
+        context = {
+                'categories': categories,
+                'page_user': page_user
+        }
         return render(request, self.template_name, context)
-
-# class CreateProfilePageView(CreateView):
-#     model = Profile
-#     template_name = 'profile/create_profile.html'
-#     fields = ['profile_pic', 'fio']
-#     def form_valid(self, form):
-#         form.instance.user = self.request.user
-#         return super().form_valid(form)
-#     success_url = reverse_lazy('profile')
-#
-#
-# class UserEditView(CreateView):
-#     form_class = UserChangeForm
-#     template_name = "profile/edit_profile.html"
-#     #success_url = reverse_lazy("")

@@ -6,18 +6,18 @@
     <div class="header-bar">
         <h1>Твой профиль, зайка <3</h>
     </div>
-    
+
+    {{page_user}}
+
     <div class="card-body">
-    {% if user.profile.profile_pic %}
-      <img src="{{ profile.profile_pic.url }}" height=100 width=100><br><br>
-    
-    {% endif %}
-      <p><strong>Ник:</strong> {{ page_user }}</p><br><br>
-      <p><strong>ФИО:</strong> {{ profile.fio }}</p><br><br>
-      <p><strong>Корпоративная почта:</strong> {{ profile.email }}</p><br><br>
-
+      {% if page_user.profile_pic %}
+      <img src="{{ page_user.profile_pic.url }}" height=100 width=100><br><br>
+      {% endif %}
+      <p><strong>Ник:</strong> {{ page_user.user.username }}</p><br><br>
+      <p><strong>ФИО:</strong> {{ page_user.fio }}</p><br><br>
+      <p><strong>Корпоративная почта:</strong> {{ page_user.user.email }}</p><br><br>
     </div>
-    <button type="submit">Изменить профиль</button>
 
+    <button type="submit">Изменить профиль</button>
 
 {% endblock content %}

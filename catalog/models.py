@@ -95,7 +95,6 @@ class Category(models.Model):
         verbose_name = "Категория"
         verbose_name_plural = "Категории"
 
-
 class Order_Dish(models.Model):
     order =  models.ForeignKey('Order', on_delete=models.CASCADE)
     dish =  models.ForeignKey('Dish', on_delete=models.CASCADE)
@@ -110,11 +109,9 @@ class Dish_Category(models.Model):
         verbose_name = "блюдо"
         verbose_name_plural = "блюда данной категории"
 
-
 class Profile(models.Model):
     user=models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     fio=models.TextField(null=True, blank=True,max_length=100)
-    email = models.TextField(null=True, blank=True)
     profile_pic = models.ImageField(null=True, blank=True, upload_to="images/profile/")
     def __str__(self):
         return str(self.user)
