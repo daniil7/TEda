@@ -4,9 +4,6 @@ from django.contrib.auth.models import Group, User
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth import get_user_model
 
- 
-
-
 admin.site.site_header = "T.Еда Административная панель"
 
 class DishInline(admin.StackedInline):
@@ -22,7 +19,7 @@ class DishAdmin(admin.ModelAdmin):
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Dish, DishAdmin)
 
-admin.site.unregister(Group)
-admin.site.unregister(User)
+# admin.site.unregister(Group)
+# admin.site.unregister(User)
 
 # Register your models here.
