@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+    <div class="header-bar">
+        <h1>Твой профиль, зайка <3</h>
+    </div>
+    
+    <div class="card-body">
+    {% if user.profile.profile_pic %}
+      <img src="{{ profile.profile_pic.url }}" height=100 width=100><br><br>
+    
+    {% endif %}
+      <p><strong>Ник:</strong> {{ page_user }}</p><br><br>
+      <p><strong>ФИО:</strong> {{ profile.fio }}</p><br><br>
+      <p><strong>Корпоративная почта:</strong> {{ profile.email }}</p><br><br>
+
+    </div>
+    <button type="submit">Изменить профиль</button>
+
+
+{% endblock content %}

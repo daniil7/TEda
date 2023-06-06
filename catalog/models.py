@@ -5,7 +5,9 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save, post_init
 from django.utils.html import format_html
-
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.urls import reverse
 
 from catalog.services.create_thumbnail import createThumbnail
 
@@ -103,3 +105,24 @@ class Dish_Category(models.Model):
     class Meta:
         verbose_name = "блюдо"
         verbose_name_plural = "блюда данной категории"
+
+
+class Profile(models.Model):
+    user=models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    fio=models.TextField(null=True, blank=True,max_length=100)
+    email = models.TextField(null=True, blank=True)
+    profile_pic = models.ImageField(null=True, blank=True, upload_to="images/profile/")
+    def __str__(self):
+        return str(self.user)
+    class Meta:
+        verbose_name = "Профиль"
+        verbose_name_plural = "Профиля"
+
+@receiver(post_save, sender=User)
+def create_userprofile(sender, instance,created,**kwargs):
+    if(created):
+        Profile.objects.create(user=instance,id = instance.id)
+
+@receiver
+def save_user_profile(sender, instance,**kwargs):
+    instance.profile.save()

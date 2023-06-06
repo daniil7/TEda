@@ -29,7 +29,7 @@ DEBUG = env.debug
 ALLOWED_HOSTS = []
 
 
-
+AUTH_PROFILE_MODULE = 'accounts.UserProfile'
 
 # Application definition
 
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'catalog',
+    
 ]
 
 LOGIN_REDIRECT_URL='/'
