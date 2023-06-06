@@ -5,12 +5,10 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save, post_init
 from django.utils.html import format_html
-from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.urls import reverse
 
 from catalog.services.create_thumbnail import createThumbnail
-
 
 # Create your models here.
 
@@ -18,8 +16,13 @@ class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     time = models.TimeField(blank=True, null=True)
     status = models.IntegerField()
-
     dishes = models.ManyToManyField('Dish', through='Order_Dish')
+
+    class statuses:
+        not_started = 0
+        in_progress = 1
+        waiting = 2
+        completed = 3
 
 
 class Dish(models.Model):
@@ -29,6 +32,7 @@ class Dish(models.Model):
     image = models.ImageField(verbose_name = "Фотография", upload_to="dish-images/", blank=True, null=True)
     previous_image = None
     weight = models.PositiveIntegerField(verbose_name = "Вес", blank=True, null=True)
+    is_stoped = models.BooleanField(default=False, verbose_name="Заблокировано")
 
     categories = models.ManyToManyField('Category', through='Dish_Category')
 

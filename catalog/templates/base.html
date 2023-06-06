@@ -10,17 +10,23 @@
         {% block title %}<title>ТЕда</title>{% endblock %}
     </head>
 
-    <body class="bg-secondary flex flex-col h-screen">
+    <body class="bg-secondary flex flex-col h-screen h-full min-height-[100vh]">
 
         {% include "inc/header.html" %}
 
-        <main>
+        <main class="grow">
 
             {% block content %}{% endblock %}
 
+            {% include "inc/paginator.html" %}
+
         </main>
 
-        {% include "inc/paginator.html" %}
+        <footer>
+
+            {% block footer %}{% endblock %}
+
+        </footer>
 
     </body>
 </html>

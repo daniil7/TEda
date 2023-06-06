@@ -20,16 +20,16 @@ from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 from django.views.generic import RedirectView
-from catalog.views import ShowProfilePageView, CreateProfilePageView, UserEditView
+from catalog.views import ShowProfilePageView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('profile/<int:pk>/', ShowProfilePageView.as_view(), name='Profile'),
-    path('create_profile_page/',CreateProfilePageView.as_view(), name='create_user_profile'),
-    path('user_edit/',CreateProfilePageView.as_view(), name='edit_profile'),
+    path('profile/', ShowProfilePageView.as_view(), name='profile'),
+    # path('create_profile_page/',CreateProfilePageView.as_view(), name='create_user_profile'),
+    # path('user_edit/',UserEditView.as_view(), name='edit_profile'),
 
     path('catalog/', include('catalog.urls')),
-    path('',include('catalog.urls')),
+    #path('', include('catalog.urls')),
     path('', RedirectView.as_view(url='/catalog/', permanent=True)),
-    
+
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
