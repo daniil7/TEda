@@ -30,6 +30,7 @@ class Dish(models.Model):
     image = models.ImageField(verbose_name = "Фотография", upload_to="dish-images/", blank=True, null=True)
     previous_image = None
     weight = models.PositiveIntegerField(verbose_name = "Вес", blank=True, null=True)
+    is_stoped = models.BooleanField(default=False, verbose_name="Заблокировано")
 
     categories = models.ManyToManyField('Category', through='Dish_Category')
 
